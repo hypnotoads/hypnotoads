@@ -20,6 +20,8 @@ angular.module('workout-app', [
         controller: 'AuthController',
         authenticate: false
       })
+      // .when('signout', {
+      // })
       .when('/profile', {
         templateUrl: 'profile/profile.html',
         controller: 'ProfileController',

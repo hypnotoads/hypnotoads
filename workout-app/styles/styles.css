@@ -165,19 +165,8 @@
 
 /*   *****************************   */
 
-
-.workout-item
-{
-    padding:10px 10px;
-    margin:0px;
-    border-bottom:1px dotted #555;
-}
-
 /* D3 bar chart */
 
-/*d3 {
-    font: 10px sans-serif;
-}*/
 .axis path, .axis line {
     fill: none;
     stroke: #000;
@@ -189,18 +178,41 @@
 .x.axis path {
     display: none;
 }
+.xlabels {
+  font-size: small;
+}
+
+.d3-tip {
+  line-height: 1;
+  padding: 12px;
+  background: rgba(0, 0, 0, 0.8);
+  color: #fff;
+  border-radius: 2px;
+}
+/* Creates a small triangle extender for the tooltip */
+.d3-tip:after {
+  box-sizing: border-box;
+  display: inline;
+  font-size: 10px;
+  width: 100%;
+  line-height: 1;
+  color: rgba(0, 0, 0, 0.8);
+  content: "\25BC";
+  position: absolute;
+  text-align: center;
+}
+/* Style northward tooltips differently */
+.d3-tip.n:after {
+  margin: -1px 0 0 0;
+  top: 100%;
+  left: 0;
+}
 
 
 /*
  * Full-page application style
  */
 
-body.application,
-.keen-dashboard {
-  background: #f2f2f2;
-  font-family: Helvetica Neue', Helvetica, Arial, sans-serif;
-  padding: 60px 20px 0;
-}
 
 body.application > .container-fluid,
 .keen-dashboard > .container-fluid {
@@ -273,11 +285,12 @@ body.application .return-link:hover,
   font-size: 14px;
   font-weight: bold;
   padding: 7px 10px 4px;
+  text-align: center;
 }
 
 .chart-wrapper .chart-stage {
   overflow: hidden;
-  padding: 5px 10px;
+/*  padding: 5px 10px;*/
   position: relative;
 }
 
@@ -287,4 +300,34 @@ body.application .return-link:hover,
   color: #808080;
   font-size: 12px;
   padding: 8px 10px 5px;
+}
+.chart-wrapper .sidebar {
+  overflow: scroll;
+  height: 500px;
+
+}
+.chart-wrapper .barchart {
+  height: 500px;
+
+}
+.chart-wrapper .smallboxes {
+  height: 200px;
+}
+
+.welcome-back {
+  margin-top: 0;
+  padding-bottom: 20px;
+  /*color: red;*/
+  /*border: 10px solid red;*/
+}
+
+.workout-item
+{
+  padding:10px 10px;
+  margin:0px;
+  border-bottom:1px dotted #555;
+}
+.workout-item .workout-type {
+  font-size: 20px;
+/*  font-weight: bold;*/
 }

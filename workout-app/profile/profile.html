@@ -1,16 +1,5 @@
 
 
-<!--############## NAVIGATION ######################-->
-
-<!-- <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><a class="selected" href="#/profile">Profile</a></li>
-      <li><a href="#/postWorkout">Post Workout</a></li>
-      <li><a href="#/feed">Feed</a></li>
-      <li><a href="#signout">Log Out</a></li>
-    </ul>
-  </nav> -->
-
 <!-- ######### MAIN CONTAINER ##########-->
 
   <div class="container-fluid">
@@ -18,55 +7,93 @@
 
 <!--     top announcement countainer -->
       <div class="row">
-        <div class="chart-stage">
-          <div class="col-sm-12">
-          <center>
-          <h1>Welcome Back, {{ data.username }}!</h1>
-          </center>
-          <br>
+       <div class="col-sm-12">
+        <div class="chart-stage welcome-back">         
+          <h1>Welcome Back, {{data.username}}!</h1>
           </div>
         </div>
       </div>
 
+<!-- ########## TOP ROW ##########-->
+
 <!-- recent workouts list/feed -->
       <div class="row">
         <div class="col-sm-3">
-          <div class="col-sm-12">
+
             <div class="chart-wrapper">
               <div class="chart-title">
                   My Recent Workouts
                 </div>
-                  <div class="chart-stage">
-
-                  <div class="user-workouts" ng-repeat="workout in data.workouts | orderBy: '-datetime' | limitTo: 10 track by $index">
+                  <div class="chart-stage sidebar">
+                  <div class="user-workouts" ng-repeat="workout in data.workouts | orderBy: '-datetime' | limitTo: 50 track by $index">
                     <div class="workout-item">
-                    <div class="datetime"><b>Date</b>: {{ workout.datetime | date: 'MM.dd.yyyy'}}</div>
-                    <div class="workout-type"><b>Type:</b> {{ workout.category }}</div>
-                    <div class="workout-duration"><b>Duration: </b>{{ workout.duration }} min</div>
-                    <div class="workout-calories"><b>Calories:</b> {{ workout.calories }}</div>
-                    <div class="comment"><b>Comment:</b> {{ workout.comment }}</div>
-                    <div class="created-at">{{ workout.createdAt }}</div>
+                      <div class="datetime">{{ workout.datetime | date: 'MMM dd'}}</div>
+                      <div class="workout-type">{{ workout.category }}</div>
+                      <div class="workout-duration">{{ workout.duration }} mins</div>
+                      <div class="workout-calories">{{ workout.calories }} calories</div>
+                      <div class="comment"><b>Comment:</b> {{ workout.comment }}</div>
+                      <div class="created-at">{{ workout.createdAt }}</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
+             
       <!-- //d3 chart -->
-        <div class="col-sm-9">
-            <div class="col-sm-12">
-              <div class="chart-wrapper">
-                <div class="chart-title">
-                  Weekly Progress Chart
-                </div>
-                  <div class="chart-stage">
-                    chart placeholder
+          <div class="col-sm-9">  
+                <div class="chart-wrapper barchart">
+                  <div class="chart-title">
+                    Weekly Progress Chart
+                  </div>
+                  <div class="chart-stage barchart">
                     <bars-chart chart-data="data.workouts" /></bars-chart>
                   </div>
                 </div>
               </div>
             </div>
+
+
+
+
+<!-- ########## SECOND ROW ##########-->
+
+<div class="row">
+          <div class="col-sm-4">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Cell Title
+              </div>
+              <div class="chart-stage smallboxes">
+              </div>
+              <div class="chart-notes">
+                Notes about this chart
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Cell Title
+              </div>
+              <div class="chart-stage smallboxes">
+              </div>
+              <div class="chart-notes">
+                Notes about this chart
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-4">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Cell Title
+              </div>
+              <div class="chart-stage smallboxes">
+              </div>
+              <div class="chart-notes">
+                Notes about this chart
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+        </div>
+                  </div>
