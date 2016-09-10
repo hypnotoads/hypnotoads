@@ -1,9 +1,9 @@
-var controller = require('./controllers');
-var router = require('express').Router();
-//Utils
-var utils = require('./utils.js');
+const controller = require('./controllers');
+const router = require('express').Router();
+// Utils
+const utils = require('./utils.js');
 
-//Connect controller methods to their corresponding routes
+// Connect controller methods to their corresponding routes
 router.get('/workouts', utils.checkUser, controller.workouts.all);
 
 router.get('/workouts/:id', utils.checkUser, controller.workouts.user);

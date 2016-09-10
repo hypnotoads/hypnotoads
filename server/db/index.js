@@ -1,13 +1,13 @@
-var Sequelize = require('sequelize');
-var db;
+const Sequelize = require('sequelize');
+let db;
 
-if(process.env.DATABASE_URL){
+if (process.env.DATABASE_URL) {
   db = new Sequelize(process.env.DATABASE_URL, {
-  logging: false,
-  dialectOptions: {
-    ssl: true
-  }
-});
+    logging: false,
+    dialectOptions: {
+      ssl: true,
+    },
+  });
 } else {
   db = new Sequelize('hypnotoad', 'fred', 'fred', {
     host: 'localhost',
@@ -15,21 +15,19 @@ if(process.env.DATABASE_URL){
     pool: {
       max: 5,
       min: 0,
-      idle: 10000
-    }
+      idle: 10000,
+    },
   });
 }
 
-
-
 // we define the models we need using js--we don't need a schema file!
-var User = db.define('User', {
+const User = db.define('User', {
   username: Sequelize.STRING,
-  password: Sequelize.STRING
-  //pre-save, password hash
+  password: Sequelize.STRING,
+  // pre-save, password hash
 });
 
-var Workout = db.define('Workout', {
+const Workout = db.define('Workout', {
   datetime: Sequelize.DATE,
   duration: Sequelize.INTEGER,
   category: Sequelize.STRING,
