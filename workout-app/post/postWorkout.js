@@ -82,7 +82,7 @@ angular.module('post-workout', [])
     cardio: ['running', 'walking', 'jogging'],
     weightlifting: ['arms', 'legs', 'full body'],
     stretching: [],
-    other: []
+    other: ['jazzercise', 'vigorous reading', 'professional debating', 'walking the dog', 'playing with children']
   }
 
   // *** go back into database and update these fields
