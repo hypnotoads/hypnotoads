@@ -86,7 +86,7 @@ var profile = angular.module('profile', [])
       //*************************************************
 
       //get data from controller, rerender when new data added
-      scope.$watch('data', function(newData, oldData) {
+      scope.$watch('data.workouts', function(newData, oldData) {
         return scope.render(newData);
       }, true);
 
