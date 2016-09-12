@@ -1,5 +1,7 @@
   body {
     font-family: 'HelveticaNeue-Light', verdana, sans-serif;
+    width: 1075px;
+    margin: 0 auto;
   }
 
   button {
