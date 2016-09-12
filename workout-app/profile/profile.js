@@ -85,8 +85,6 @@ var profile = angular.module('profile', [])
       //render function each time we receive data from controller
       //leaving sortBy here for now, think about how to switch between time/calories
       scope.render = function(data, sortBy) {
-
-        svg.selectAll("*").remove();
        
           //make sure numbers in data file are numbers
           data.forEach(function (d) {
