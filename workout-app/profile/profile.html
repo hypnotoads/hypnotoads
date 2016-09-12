@@ -1,72 +1,109 @@
+  <div class="container-fluid profile-only" ng-app="profile" ng-controller="ProfileController">
 
+<!-- Welcome Back Row  -->
 
-<!--############## NAVIGATION ######################-->
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="chart-stage welcome-back">
+        <h1>Welcome Back, {{data.username}}!</h1>
+      </div>
+    </div>
+  </div>
 
-<!-- <nav class="navbar navbar-default">
-    <ul class="nav navbar-nav">
-      <li><a class="selected" href="#/profile">Profile</a></li>
-      <li><a href="#/postWorkout">Post Workout</a></li>
-      <li><a href="#/feed">Feed</a></li>
-      <li><a href="#signout">Log Out</a></li>
-    </ul>
-  </nav> -->
+<!-- First Row, workout feed & bar chart -->
 
-<!-- ######### MAIN CONTAINER ##########-->
-
-  <div class="container-fluid">
-    <div class="profile-only" ng-app="profile" ng-controller="ProfileController">
-
-<!--     top announcement countainer -->
-      <div class="row">
-        <div class="chart-stage">
-          <div class="col-sm-12">
-          <center>
-          <h1>Welcome Back, {{ data.username }}!</h1>
-          </center>
-          <br>
+  <!-- Workout Feed -->
+   <div class="row" id="toprow">
+    <div class="col-sm-3">
+      <div class="chart-wrapper">
+        <div class="chart-title">
+          My Recent Workouts
+        </div>
+        <div class="chart-stage sidebar">
+          <div class="user-workouts" ng-repeat="workout in data.workouts | orderBy: '-datetime' | limitTo: 50 track by $index">
+            <div class="workout-item">
+              <div class="datetime">{{ workout.datetime | date: 'MMM dd'}}</div>
+              <div class="workout-type">{{ workout.category }}</div>
+              <div class="workout-duration">{{ workout.duration }} mins</div>
+              <div class="workout-calories">{{ workout.calories }} calories</div>
+              <div class="comment">Comment: {{ workout.comment }}</div>
+              <div class="created-at">{{ workout.createdAt }}</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  
+      <!-- All D3 Charts -->
+      <div class="col-sm-9">
+        <div class="row">
 
-<!-- recent workouts list/feed -->
-      <div class="row">
-        <div class="col-sm-3">
-          <div class="col-sm-12">
+          <!-- large weekly progress bar chart -->
+            <div class="col-sm-12">
             <div class="chart-wrapper">
               <div class="chart-title">
-                  My Recent Workouts
-                </div>
-                  <div class="chart-stage">
-
-                  <div class="user-workouts" ng-repeat="workout in data.workouts | orderBy: '-datetime' | limitTo: 10 track by $index">
-                    <div class="workout-item">
-                    <div class="datetime"><b>Date</b>: {{ workout.datetime | date: 'MM.dd.yyyy'}}</div>
-                    <div class="workout-type"><b>Type:</b> {{ workout.category }}</div>
-                    <div class="workout-duration"><b>Duration: </b>{{ workout.duration }} min</div>
-                    <div class="workout-calories"><b>Calories:</b> {{ workout.calories }}</div>
-                    <div class="comment"><b>Comment:</b> {{ workout.comment }}</div>
-                    <div class="created-at">{{ workout.createdAt }}</div>
-                  </div>
+                Weekly Progress Chart
+              </div>       
+               <div class="chart-stage barchart">
+                  <bars-chart chart-data="data.workouts" /></bars-chart>
                 </div>
               </div>
             </div>
           </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-      <!-- //d3 chart -->
-        <div class="col-sm-9">
-            <div class="col-sm-12">
-              <div class="chart-wrapper">
-                <div class="chart-title">
-                  Weekly Progress Chart
-                </div>
-                  <div class="chart-stage">
-                    chart placeholder
-                    <bars-chart chart-data="data.workouts" /></bars-chart>
-                  </div>
-                </div>
-              </div>
+<!--smaller charts -->
+  <div class="row" id="secondrow">
+    <div class="col-sm-4">
+
+    <!-- workout days this week -->
+      <div class="chart-wrapper">
+        <div class="chart-title">
+          Workout Days This week
+        </div>
+        <div class="chart-stage smallboxes" id="workout-days-chart">
+          <div ng-if="data.workouts">
+            <workout-days-chart chart-data="data.workouts">
+            </workout-days-chart>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  <!-- calories this month -->
+    <div class="col-sm-4">
+      <div class="chart-wrapper">
+        <div class="chart-title">
+            Calories Burned This Month
+          </div>
+          <div class="chart-stage smallboxes" id="calories-chart">
+            <div ng-if="data.workouts">
+            <calories-chart chart-data="data.workouts"></calories-chart>
             </div>
           </div>
         </div>
       </div>
+
+    <!-- TBD Chart -->
+      <div class="col-sm-4">
+        <div class="chart-wrapper">
+          <div class="chart-title">
+            Your Custom Chart Here!
+          </div>
+          <div class="chart-stage">
+            <img data-src="holder.js/100%x120/white">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+          
+
+  
