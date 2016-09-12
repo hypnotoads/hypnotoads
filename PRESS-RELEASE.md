@@ -38,8 +38,7 @@ Once the project moves into development, the press release can be used as a touc
   > Just input a workout...
 
 ## Customer Quote ##
-  > "I never used to workout...now I occasionally workout...and it is all because of this app...maybe."
+  > "I never used to excercise...now I occasionally excercise...and it is all because of this app...maybe."
 
 ## Closing and Call to Action ##
   > Input a workout!
-
