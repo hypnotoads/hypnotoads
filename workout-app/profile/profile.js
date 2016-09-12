@@ -3,7 +3,6 @@ var profile = angular.module('profile', [])
   .controller('ProfileController', function($scope, $http, $window, $location, Workouts) {
 
     $scope.data = {
-      workouts: 'placeholder workout',
       username: $window.localStorage.getItem('username').charAt(0).toUpperCase() + $window.localStorage.getItem('username').slice(1)
     }
 
@@ -13,7 +12,6 @@ var profile = angular.module('profile', [])
       $scope.data.workouts = data;
     })
 
-
     // //get all of a given user's workouts to display - function in routes.js will change
     // Workouts.getAllWorkouts()
     //   .then(function(data) {
@@ -21,12 +19,6 @@ var profile = angular.module('profile', [])
     //     $scope.data.workouts = data;
     //   })
 
-    // //get current user's username - function in routes.js will change
-    // Workouts.getUser()
-    //   .then(function(data) {
-    //     console.log("data username", data.username);
-    //     $scope.data.username = data.username;
-    //   })
   })
 
   // //directive for d3 bar chart
