@@ -1,5 +1,5 @@
 [![Stories in Ready](https://badge.waffle.io/hypnotoads/hypnotoads.png?label=ready&title=Ready)](https://waffle.io/hypnotoads/hypnotoads)
-# hypnotoads
+# Hypnotoads
 Social workout tracker
 ## Motivation
 Hypnotoads is a social workout tracker intended to let users to share their progress, learn from others, and find support in a safe, health-oriented environment. 
