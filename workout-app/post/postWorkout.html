@@ -1,3 +1,13 @@
+<nav class="navbar navbar-default" ng-controller="AuthController">
+  <ul class="nav navbar-nav">
+    <li><a class="selected" href="#/profile">My Profile</a></li>
+    <li><a href="#/postWorkout">Update Schedule</a></li>
+    <li><a href="#/feed">Feed</a></li>
+    <li><a href="#/signout" ng-click="signout()" >Log Out</a></li>
+  </ul>
+</nav>
+
+
 <center>
 <h4>For the week of: </h4>
 <h3>{{ weekStart }} to {{ weekEnd }}</h3>

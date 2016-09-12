@@ -1,4 +1,14 @@
-  <div class="container-fluid profile-only" ng-app="profile" ng-controller="ProfileController">
+<nav class="navbar navbar-default" ng-controller="AuthController">
+  <ul class="nav navbar-nav">
+    <li><a class="selected" href="#/profile">My Profile</a></li>
+    <li><a href="#/postWorkout">Update Schedule</a></li>
+    <li><a href="#/feed">Feed</a></li>
+    <li><a href="#/signout" ng-click="signout()" >Log Out</a></li>
+  </ul>
+</nav>
+
+
+<div class="container-fluid profile-only" ng-app="profile" ng-controller="ProfileController">
 
 <!-- Welcome Back Row  -->
 
@@ -33,7 +43,7 @@
       </div>
     </div>
   </div>
-  
+
       <!-- All D3 Charts -->
       <div class="col-sm-9">
         <div class="row">
@@ -43,7 +53,7 @@
             <div class="chart-wrapper">
               <div class="chart-title">
                 Weekly Progress Chart
-              </div>       
+              </div>
                <div class="chart-stage barchart">
                   <bars-chart chart-data="data.workouts" /></bars-chart>
                 </div>
@@ -104,6 +114,6 @@
   </div>
 
 
-          
 
-  
+
+
