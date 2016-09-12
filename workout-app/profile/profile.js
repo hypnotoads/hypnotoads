@@ -1,4 +1,4 @@
-angular.module('profile', [])
+var profile = angular.module('profile', [])
 
   .controller('ProfileController', function($scope, $http, $window, $location, Workouts) {
 
@@ -27,17 +27,14 @@ angular.module('profile', [])
     //     console.log("data username", data.username);
     //     $scope.data.username = data.username;
     //   })
-})
+  })
 
-  //directive for d3 bar chart
-  .directive('barsChart', function () {
+  // //directive for d3 bar chart
+  profile.directive('barsChart', function () {
 
-    
     return {
-      restrict: 'E',
-      replace: false,
-      scope: {data: '=chartData'},
-
+      restrict: 'E',     
+      scope: {data: '=chartData'}, //tied to chart-data in html
       link: function (scope, element, attrs) {
 
       //******************************************//
@@ -45,79 +42,72 @@ angular.module('profile', [])
       //******************************************//
 
 
-    var 
-    margin = {
-    top: 20,
-    right: 20,
-    bottom: 30,
-    left: 60
-    },
-    width = 600 - margin.left - margin.right,
-    height = 300 - margin.top - margin.bottom;
+      var margin = {
+        top: 50,
+        bottom: 10,
+        left: 60, 
+        right: 60
+      },
+      width = 800 - margin.left - margin.right,
+      height = 350 - margin.top - margin.bottom;
 
-        // Our X scale
-        var x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], .1);
+      // X scale
+      var x = d3.scale.ordinal()
+          .rangeRoundBands([0, width], .1);
 
-        // Our Y scale
-        var y = d3.scale.linear()
-            .rangeRound([height, 0]);
+      // Y scale
+      var y = d3.scale.linear()
+          .rangeRound([height, 0]);
 
-        // Our color bands
-        var color = d3.scale.ordinal()
-            .range(["#00e6e6", "#5fa9f3", "#1176db", "#ff66cc"]);
+      // Color bands
+      var color = d3.scale.ordinal()
+          .range(["#00e6e6", "#5fa9f3", "#1176db", "#ff66cc"]);
 
-        // Use our X scale to set a bottom axis
-        var xAxis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom");
+      // Use our X scale to set a bottom axis
+      var xAxis = d3.svg.axis()
+          .scale(x)
+          .orient("bottom");
 
-        // Same for our left axis
-        var yAxis = d3.svg.axis()
-            .scale(y)
-            .orient("left")
-            .tickFormat(d3.format(".2s"));
+      // Same for our left axis
+      var yAxis = d3.svg.axis()
+          .scale(y)
+          .orient("left")
+          .tickFormat(d3.format(".2s"));
 
+      // Add our chart to the document body, make responsive w viewbox
+      var svg = d3.select("bars-chart").append("svg")
+         .attr("preserveAspectRatio", "none")
+          .attr("viewBox", "0 0 800 400")
+          .append("g")
+          .attr("transform", "translate(" + margin.left + "," + margin.right + ")");
 
+      //*************************************************
+      //********** DATA RETRIEVAL & FORMATTING **********
+      //*************************************************
 
+      //get data from controller, rerender when new data added
+      scope.$watch('data', function(newData, oldData) {
+        return scope.render(newData);
+      }, true);
 
-        // Add our chart to the document body, make responsive
+      //render function each time we receive data from controller
+      //leaving sortBy here for now, think about how to switch between time/calories
+      scope.render = function(data, sortBy) {
 
-        var svg = d3.select("bars-chart").classed("svg-container", true).append("svg")
-           .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "0 0 600 400")
-            .append("g")
-            .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-        var chartLabel = "minutes of exercise";
-
-//*************************************************
-//********** DATA RETRIEVAL & FORMATTING **********
-//*************************************************
-
-        //get data from controller
-        scope.$watch('data', function(newData, oldData) {
-          return scope.render(newData);
-        }, true);
-
-        //render function each time we receive data from controller
-        //leaving sortBy here for now, think about how to switch between time/calories
-        scope.render = function(data, sortBy) {
-
-          svg.selectAll("*").remove();
-
-        //get data from sample data file
-        //d3.json('../testdata/new.json', function (error, data) {
-          
+        svg.selectAll("*").remove();
+       
           //make sure numbers in data file are numbers
           data.forEach(function (d) {
             d.duration = +d.duration; 
             d.calories = +d.calories;
             d.year = +d.year;
             d.week = +d.week;
-           });
+``         });
 
-          //combine category data for each week with nest/rollup
+          // combine category data for each week with nest/rollup
+          // keys = values to be combined. hard coded because we don't expect broad categories
+          // to change too much so they are hardcoded here. could alternatively run a function
+          // similar to the color.domain function below to obtain values
           data = d3.nest()
             .key(function(d) { return d.week; })
             .rollup(function(values) {
@@ -127,7 +117,7 @@ angular.module('profile', [])
                   if (d.category === key) {
                     //can switch between duration and calories here in refactor. returning
                     //a value here determines what values are rendered in stacked bar chart
-                    return d.calories;
+                    return d.duration;
                   }
                 })
               })
@@ -135,7 +125,7 @@ angular.module('profile', [])
             })
             .entries(data);
 
-          //flatten array with sum values to make it easier to work with
+          //flatten data with sum values to make it easier to work with
           data = data.map(function(d) {
             return d.value = {
               "week": moment().day("Sunday").week(d.key).format("MM/DD/YY"),
@@ -147,7 +137,7 @@ angular.module('profile', [])
           }).reduce(function (d1, d2) {return d1.concat(d2)}, []);
 
          // Use values to set our color bands, skip week property
-         //use d3.keys to populate keys array above?
+         // use d3.keys to populate keys array above?
           color.domain(d3.keys(data[0]).filter(function (key) {
               return key !== "week" && key !=="year";
           }));
@@ -166,22 +156,18 @@ angular.module('profile', [])
             d.total = d.types[d.types.length - 1].y1;
           });
 
-          // Sort by week
-          // data.sort(function (a, b) {
-          //   return a.week - b.week;
-          // });
-
           // x domain is set of weeks
           x.domain(data.map(function (d) {
             return d.week;
           }));
 
-          // y domain is max value of totals + extra
+          // y domain is max value of totals + a litle extra room for legend
+          // can adjust return value depending on values displayed
           y.domain([0, d3.max(data, function (d) {
             return d.total + 50;
           })]);
 
-          // make text labels vertical
+          // make vertical text labels for x axis
           svg.append("g")
             .attr("class", "x axis")
             .attr("transform", "translate(0," + height + ")")
@@ -194,81 +180,252 @@ angular.module('profile', [])
             .attr("transform", "rotate(90)")
             .style("text-anchor", "start");
 
-          var sortedaxis = "calories"
-
           svg.append("g")
-              .attr("class", "y axis")
-              .call(yAxis)
-              .append("text")
-              .attr("font-size", "12px")
-              .text(sortedaxis);
+            .attr("class", "y axis")
+            .call(yAxis)
+            .append("text")
+            .attr("font-size", "12px")
+            .text("minutes of exercise per week");
 
           var week = svg.selectAll(".week")
-              .data(data)
-              .enter().append("g")
-              .attr("class", "g")
-              .attr("transform", function (d) {
+            .data(data)
+            .enter().append("g")
+            .attr("class", "g")
+            .attr("transform", function (d) {
               return "translate(" + x(d.week) + ",0)";
-          });
+            });
 
-          //tooltip displays workout type + value for portion of bar user hovers over
+          // tooltip displays workout type + value for portion of bar user hovers over
+          // called when bars are rendered
           var tip = d3.tip()
             .attr('class', 'd3-tip')
             .offset([-10, 0])
             .html(function(d) {
-              console.log("d: ", d)
               return d.name + ": " + d.value;
             })
 
           svg.call(tip);
-
+  
+          // get types from each data object and render in stacked bar, 
+          // show tooltips on mouseover
           week.selectAll("rect")
-              .data(function (d) {
-              return d.types;
+            .data(function (d) {
+            return d.types;
           })
-              .enter().append("rect")
-              .attr("width", x.rangeBand())
-              .attr("y", function (d) {
-              return y(d.y1);
+            .enter().append("rect")
+            .attr("width", x.rangeBand())
+            .attr("y", function (d) {
+            return y(d.y1);
           })
-              .attr("height", function (d) {
-              return y(d.y0) - y(d.y1);
+            .attr("height", function (d) {
+            return y(d.y0) - y(d.y1);
           })
-              .style("fill", function (d) {
-              return color(d.name);
+            .style("fill", function (d) {
+            return color(d.name);
           })
-          .on('mouseover', tip.show)
-          .on('mouseout', tip.hide);
-
-
+            .on('mouseover', tip.show)
+            .on('mouseout', tip.hide);
 
           //i multiplier affects spacing between legend items
           var legend = svg.selectAll(".legend")
-              .data(color.domain().slice().reverse())
-              .enter().append("g")
-              .attr("class", "legend")
-              .attr("transform", function (d, i) {
-              return "translate(0," + i * 20 + ")";
+            .data(color.domain().slice().reverse())
+            .enter().append("g")
+            .attr("class", "legend")
+            .attr("transform", function (d, i) {
+            return "translate(0," + i * 15 + ")";
           });
 
-          //these are the colored squares in the legend
+          //colored squares in the legend
           legend.append("rect")
-              .attr("x", width - 18)
-              .attr("width", 18)
-              .attr("height", 18)
-              .style("fill", color);
+            .attr("x", width - 10)
+            .attr("width", 10)
+            .attr("height", 10)
+            .style("fill", color);
 
           //legend text
           legend.append("text")
-              .attr("x", width - 24)
-              .attr("y", 9)
-              .attr("dy", ".35em")
-              .style("text-anchor", "end")
-              .text(function (d) {
-              return d;
-          }); 
-        };
-      } 
-    };
- });
+            .attr("x", width - 20)
+            .attr("y", 5)
+            .attr("dy", ".35em") //location of text labels
+            .style("font-size", "10")
+            .style("text-anchor", "end")
+            .text(function (d) {
+            return d;
+          });
+
+        };//scope.render        
+      } //link
+    };//return
+  });//directive
+
+
+// ************************************************
+// ********** workoutDaysChart directive **********
+// ************************************************
+
+  profile.directive('workoutDaysChart', function () {
+
+    
+
+    return {
+      restrict: 'E',     
+      scope: {data: '=chartData'}, //tied to chart-data in html
+
+      link: function (scope, element, attrs) {
+
+        //obtain data from scope
+        scope.$watch('data', function(newData, oldData) {
+          return scope.render(newData);
+        }, true);
+
+        //render function each time we receive data from controller
+        //leaving sortBy here for now, think about how to switch between time/calories
+        scope.render = function(data, sortBy) {
+
+        data = data.sort(function (a, b) {
+          return d3.descending(a.datetime, b.datetime);
+        })
+
+        //load data from workouts done in the last 7 days
+        data = data.filter(function(d) {            
+          return (moment(d.datetime).format('YYYY-MM-DD') > moment().subtract(7, 'd').format('YYYY-MM-DD'))
+        })
+
+        // obtain the number of days worked out in the last week
+        data = data.length;
+
+        // two pieces of data for chart: number of days worked out, and not
+        var dataset = [
+          data/7, (7-data)/7
+        ];
+
+
+// d3/svg setup
+    var width = 200,
+        height = 200,
+        radius = Math.min(width, height) / 2;
+
+    var color = d3.scale.ordinal()
+      .range(["#1D7CF2", "#D3D3D3"])
+
+    var pie = d3.layout.pie()
+      .sort(null);
+
+    var arc = d3.svg.arc()
+      .innerRadius(radius - 15)
+      .outerRadius(radius - 50);
+
+    var svg = d3.select("workout-days-chart").append("svg")
+      .attr("width", width)
+      .attr("height", height)
+      .append("g")
+      .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+        // render donut chart
+        var path = svg.selectAll("path")
+            .data(pie(dataset))
+          .enter().append("path")
+            .attr("fill", function(d, i) { return color(i); })
+            .attr("d", arc);
+
+        svg.append("text")
+          .attr("dy", ".35em") //to center in circle
+          .attr("text-anchor", "middle")
+          .attr("class", "exerciseDays")
+          .attr("fill", "#1176db")
+          .text(data);
+
+        }//render
+      }//link
+    };//return
+  });//directive
+
+ profile.directive('caloriesChart', function () {
+
+  
+  return {
+    restrict: 'E',     
+    scope: {data: '=chartData'}, //tied to chart-data in html
+
+    link: function (scope, element, attrs) {
+
+      scope.$watch('data', function(newData, oldData) {
+        return scope.render(newData);
+      }, true);
+
+      //render function each time we receive data from controller
+      //leaving sortBy here for now, think about how to switch between time/calories
+      scope.render = function(data, sortBy) {
+     
+      //make sure numbers in data file are numbers
+      data.forEach(function (d) {
+        d.duration = +d.duration; 
+        d.calories = +d.calories;
+        d.year = +d.year;
+        d.week = +d.week;
+      });
+
+      data = data.sort(function (a, b) {
+        return d3.descending(a.datetime, b.datetime);
+      })
+
+      data = data.filter(function(d) {            
+        return (moment(d.datetime).format('YYYY-MM-DD') > moment().subtract(1, 'month').format('YYYY-MM-DD'))
+      })
+      
+      data = d3.nest()
+        .key(function(d) { return d.category; })
+        .rollup(function(v) { return d3.sum(v, function(d) {return d.calories}) })
+        .entries(data);
+
+      var dataset = [];
+
+      data.forEach(function(d) {
+        dataset.push({category: d.key, calories: d.values});
+      })
+
+      var width = 200,
+      height = 200,
+      radius = Math.min(width, height) / 2;
+
+      var color = d3.scale.ordinal()
+        .range(["#00e6e6", "#5fa9f3", "#1176db", "#ff66cc"]);
+
+      var arc = d3.svg.arc()
+        .innerRadius(radius - 15)
+        .outerRadius(radius - 50);
+
+      var pie = d3.layout.pie()
+        .value(function(d) { return d.calories; })
+        .sort(null);
+
+      // Add our chart to the document body, make responsive
+
+      var svg = d3.select("calories-chart").append("svg")
+        .attr("width", width)
+        .attr("height", height)
+        .append("g")
+        .attr("transform", "translate(" + width / 2 + "," + height / 2 + ")");
+
+      var path = svg.selectAll("path")
+        .data(pie(dataset))
+        .enter().append("path")
+        .attr("fill", function(d, i) { return color(i);})
+        .attr("d", arc);
+
+      path.append("text")
+        .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+        .attr("dy", ".35em")
+        .text("hello")//function(d) { return d.data.age; });
+
+      svg.append("text")
+        .attr("dy", ".35em") //to center in circle
+        .attr("text-anchor", "middle")
+        .attr("class", "monthCalories")
+        .attr("fill", "#1176db")
+        .text(d3.sum(dataset, function(d) {return d.calories}));
+
+        };//render
+      } //link
+    }; //return
+  }); //directive
 
