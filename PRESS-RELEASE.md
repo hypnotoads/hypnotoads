@@ -1,9 +1,6 @@
 # Hypnotoads #
 
-## Heading ##
-Workoutster?
-
-## Sub-Heading ##
+## Workoutster ##
 This product helps people who workout keep track of their workouts.
 
 ## Summary ##
