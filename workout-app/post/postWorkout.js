@@ -81,7 +81,7 @@ angular.module('post-workout', [])
   var workoutCategories = {
     cardio: ['running', 'walking', 'jogging'],
     weightlifting: ['arms', 'legs', 'full body'],
-    stretching: [],
+    stretching: ['active', 'ballistic', 'dynamic', 'isometric', 'passive', 'PNF', 'static'],
     other: ['jazzercise', 'vigorous reading', 'professional debating', 'walking the dog', 'playing with children']
   }
 
