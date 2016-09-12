@@ -18,11 +18,11 @@ Empty, unused directory. Should be removed.
 ### Controllers
 controllers/index.js - contains all of the methods used by routes.js to:  
 1. Create users  
-1. Log in users  
-1. Add workouts  
-1. Retrieve all workouts  
-1. Retrieve a user’s workouts  
-1. Delete a workout
+2. Log in users  
+3. Add workouts  
+4. Retrieve all workouts  
+5. Retrieve a user’s workouts  
+6. Delete a workout
 ### DB
 db/index.js - tables, relationships, and db initialization for PostgreSQL db via Sequelize
 
