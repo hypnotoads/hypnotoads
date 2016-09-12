@@ -17,37 +17,29 @@ Once the project moves into development, the press release can be used as a touc
  -->
 
 ## Heading ##
-  > Name the product in a way the reader (i.e. your target customers) will understand.
-  Workoutster?
+  > Workoutster?
 
 ## Sub-Heading ##
-  > Describe who the market for the product is and what benefit they get. One sentence only underneath the title.
-  This product helps people who workout keep track of their workouts.
+  > This product helps people who workout keep track of their workouts.
 
 ## Summary ##
-  > Give a summary of the product and the benefit. Assume the reader will not read anything else so make this paragraph good.
-  This is a workout app that allows you to enter your workouts, visualize what you have accomplished, and also look at the other people's workouts.
+  > This is a workout app that allows you to enter your workouts, visualize what you have accomplished, and also look at the other people's workouts.
 
 ## Problem ##
-  > Describe the problem your product solves.
-  Hmm...the world does not have enough workout apps?
+  > Hmm...the world does not have enough workout apps?
 
 ## Solution ##
-  > Describe how your product elegantly solves the problem.
-  Our workout app provides awe-inspiring visualizations to motivate the self and others.
+  > Our workout app provides awe-inspiring visualizations to motivate the self and others.
 
 ## Quote from You ##
-  > A quote from a spokesperson in your company.
-  "Yup, it's a workout app."
+  > "Yup, it's a workout app."
 
 ## How to Get Started ##
-  > Describe how easy it is to get started.
-  Just enter a workout...
+  > Just input a workout...
 
 ## Customer Quote ##
-  > Provide a quote from a hypothetical customer that describes how they experienced the benefit.
-   "I never used to workout...now I occasionally workout...and it is all because of this app...maybe."
+  > "I never used to workout...now I occasionally workout...and it is all because of this app...maybe."
 
 ## Closing and Call to Action ##
-  > Wrap it up and give pointers where the reader should go next.
-  Enter a workout!
+  > Input a workout!
+
