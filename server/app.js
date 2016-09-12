@@ -1,5 +1,4 @@
 const express = require('express');
-const session = require('express-session');
 
 // Middleware
 const morgan = require('morgan');
@@ -20,12 +19,6 @@ app.set('port', port);
 // Logging and parsing
 app.use(morgan('dev'));
 app.use(parser.json());
-
-app.use(session({
-  secret: 'mE2bNdyu2p',
-  resave: false,
-  saveUninitialized: true,
-}));
 
 // Set up our routes
 app.use('/', router); // Formerly '/classes'
