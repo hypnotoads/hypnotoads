@@ -1,10 +1,10 @@
 angular.module('profile', [])
 
-  .controller('ProfileController', function($scope, $http, Workouts) {
+  .controller('ProfileController', function($scope, $http, $window, $location, Workouts) {
 
     $scope.data = {
       workouts: 'placeholder workout',
-      username: 'placeholder name'
+      username: $window.localStorage.getItem('username').charAt(0).toUpperCase() + $window.localStorage.getItem('username').slice(1)
     }
 
     //use this snippet to test with local data file
@@ -41,10 +41,10 @@ angular.module('profile', [])
     height = 400 - margin.top - margin.bottom;
 
     return {
-      restrict: 'E',     
+      restrict: 'E',
       replace: false,
       scope: {data: '=chartData'},
-      
+
       link: function (scope, element, attrs) {
 
         // Our X scale
@@ -77,12 +77,12 @@ angular.module('profile', [])
            .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "0 0 600 400")
            //class to make it responsive
-           .classed("svg-content-responsive", true) 
+           .classed("svg-content-responsive", true)
             // .attr("width", width + margin.left + margin.right)
             // .attr("height", height + margin.top + margin.bottom)
             .append("g")
             .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-        
+
         d3.json('../testdata/new.json', function (error, data) {
           //Force numbers into numbers format
 
@@ -99,7 +99,7 @@ angular.module('profile', [])
             .rollup(function(values) {
               var counts = {}, keys = ['stretching', 'other', 'cardio', 'weightlifting']
               keys.forEach(function(key) {
-                counts[key] = d3.sum(values, function(d) { 
+                counts[key] = d3.sum(values, function(d) {
                   if (d.category === key) {
                     //can switch between duration and calories here in refactor
                     return d.duration;
@@ -126,7 +126,7 @@ angular.module('profile', [])
           color.domain(d3.keys(flat[0]).filter(function (key) {
               return key !== "week" && key !=="year";
           }));
-          
+
           flat.forEach(function (d) {
             var y0 = 0;
             d.types = color.domain().map(function (name) {
@@ -245,9 +245,9 @@ angular.module('profile', [])
 
 
 
-  
+
         });
-      } 
+      }
     };
  });
 

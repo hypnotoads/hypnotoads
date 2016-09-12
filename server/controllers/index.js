@@ -30,6 +30,7 @@ module.exports = {
             duration: req.body.duration,
             datetime: req.body.datetime,
             category: req.body.category,
+            type: req.body.type,
             comment: req.body.comment,
             calories: req.body.calories,
             year: req.body.year,
