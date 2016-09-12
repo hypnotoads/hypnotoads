@@ -19,13 +19,6 @@ module.exports = {
         .catch(error => console.error(error));
     },
 
-    change(req, res) {
-      db.Workout.find({ where: { id: req.workout.id } })
-        .then(workout => {
-
-        })
-    }
-
     add(req, res) {
       // should just be create
       db.User.find({ where: { username: req.user.username } })
