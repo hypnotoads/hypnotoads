@@ -19,6 +19,13 @@ module.exports = {
         .catch(error => console.error(error));
     },
 
+    change(req, res) {
+      db.Workout.find({ where: { id: req.workout.id } })
+        .then(workout => {
+
+        })
+    }
+
     add(req, res) {
       // should just be create
       db.User.find({ where: { username: req.user.username } })
@@ -30,6 +37,7 @@ module.exports = {
             duration: req.body.duration,
             datetime: req.body.datetime,
             category: req.body.category,
+            type: req.body.type,
             comment: req.body.comment,
             calories: req.body.calories,
             year: req.body.year,

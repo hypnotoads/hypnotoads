@@ -1,9 +1,9 @@
 <center>
-<h4>For the week of: {{ weekStart }} to {{ weekEnd }}</h4>
-
-
+<h4>For the week of: </h4>
+<h3>{{ weekStart }} to {{ weekEnd }}</h3>
+<br>
 <div class="weeklyLayout">
-  <div class="weekday" ng-repeat="(stringDayOfWeek, numericalDayOfWeek) in daysOfTheWeek">
+  <div class="weekday" ng-repeat="(stringDayOfWeek, numericalDayOfWeek) in daysOfTheWeek" >
 
     <div class="weekdayName">{{ stringDayOfWeek }}</div>
 
@@ -19,16 +19,17 @@
 
         </select>
         <br><br>
-        <!--
-        (uncomment this to add nested workout types within each category)
+
         workout:
         <br>
-        <select name="workoutType" ng-model="type">
+        <select name="workoutType" ng-model="workouttype">
           <option ng-repeat="type in workoutCategories[category]" value="{{ type }}"> {{ type }}</option>
         </select>
         <br><br>
+
+        <!-- can this be refactored?
+        anna: i couldn't get the models to bind if i used ng-repeat. we can ty again tomorrow?
         -->
-        <!-- can this be refactored? -->
         <div>
           duration (in minutes):
           <br>
@@ -47,22 +48,22 @@
           <input type="text" ng-model="comment">
         </div>
 
-        <button ng-click="createWorkout(category, numericalDayOfWeek, comment, duration, calories); toggle(addNewElement[stringDayOfWeek])">add workout!</button>
+        <button ng-click="createWorkout(currentId, category, workouttype, numericalDayOfWeek, comment, duration, calories); toggle(addNewElement[stringDayOfWeek])">add workout!</button>
         <br>
 
         <button ng-click="toggle(addNewElement[stringDayOfWeek])">cancel</button>
         <br><br>
       </form>
     </div>
-<!--
-<nav></nav>eed to add filter to only show current user -->
-    <div ng-show="!addNewElement[stringDayOfWeek].hidden" ng-repeat="workout in workoutsDatabase | filter: { day: numericalDayOfWeek, week: displayedWeek }" class="theWorkouts {{ workout.category }}">
-      <span ng-show="!workout.hidden" ng-click="toggle(workout)" >
-        {{ workout.category }}
-      </span>
 
-      <span ng-show="workout.hidden" class="workoutDetailed">
+    <div ng-show="!addNewElement[stringDayOfWeek].hidden" ng-repeat="workout in workoutsDatabase| filter: { UserId: currentId, day: numericalDayOfWeek, week: displayedWeek }" >
+      <div class="theWorkouts {{ workout.category }}" ng-show="!workout.hidden" ng-click="toggle(workout)">
+        {{ workout.type }}
+      </div>
+
+      <div ng-show="workout.hidden" class="workoutDetailed theWorkouts {{ workout.category }}">
         <button ng-click="toggle(workout)">go back</button>
+        <button ng-click="deleteThisWorkout(workout.id)">delete</button>
         <br><br>
 
         <!-- add functionality to update these fields in the database by clicking to edit the text -->
@@ -80,7 +81,7 @@
         <button ng-click="addField(newField, workoutFields)">add field</button>
         <input type="text" ng-model="newField">
          -->
-      </span>
+      </div>
     </div>
 
   </div>
@@ -88,29 +89,5 @@
 
 <button ng-click="changeDisplayedWeek('prev')">Go to previous week!</button>
 <button ng-click="changeDisplayedWeek('next')">Go to next week!</button>
-<!--
-Draggable calendar:
-<div class="weeklyLayout calendarWeeklyLayout">
-  <div class="weekday calendarWeek" ng-repeat="(stringDayOfWeek, numericalDayOfWeek) in daysOfTheWeek">
-    <div class="weekdayName calendarWeekdayName">{{ dayOfWeek[0] }}</div>
-    <div ng-repeat="blank in calendarTimes[dayOfWeek[0]] track by $index" class="calendarEntries {{ blank.class }}" ng-drop="true" ng-drop-success="onDropComplete($index, $data, $event, calendarTimes[dayOfWeek[0]])">
-      <div ng-drag="true" ng-drag-data="blank">
-        {{ blank.category }}
-      </div>
-    </div>
-  </div>
-</div>
-
-Non draggable calendar:
-<div class="weeklyLayout calendarWeeklyLayout">
-  <div class="weekday calendarWeek" ng-repeat="dayOfWeek in allWorkouts">
-    <div class="weekdayName calendarWeekdayName">{{ dayOfWeek[0] }}</div>
-    <div ng-repeat="blank in calendarTimes[dayOfWeek[0]] track by $index" class="calendarEntries {{ blank.class }}" >
-      <div>
-        {{ blank.category }}
-      </div>
-    </div>
-  </div>
-</div> -->
 
 </center>

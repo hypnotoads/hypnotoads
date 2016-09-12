@@ -1,15 +1,25 @@
   body {
-    font-family: 'Muli', verdana, sans-serif;
+    font-family: 'HelveticaNeue-Light', verdana, sans-serif;
   }
 
   button {
     border: none;
-    font-family: 'Muli', verdana, sans-serif;
+    font-family: 'HelveticaNeue-Light', verdana, sans-serif;
     margin: 2px;
   }
 
   button:hover {
     opacity: 0.8;
+  }
+
+  h3 {
+    padding: 0px;
+    margin: -5px;
+  }
+
+  h4 {
+    padding: 0px;
+    border: 0px;
   }
 
   input[type="text"] {
@@ -24,7 +34,17 @@
     color: black;
   }
 
+  #allLayouts {
+    overflow: auto;
+    top: 200px;
+    bottom: 20px;
+    position: fixed;
+    border: dashed 2px #DBDBDB;
+    padding: 5px;
+    left: 150px;
+    right: 150px;
 
+  }
   .endTime {
     position: absolute;
     bottom: 0px;
@@ -34,9 +54,10 @@
   }
 
   .weeklyLayout {
-    background-color: #9BC1BC;
+    background-color: #DBDBDB;
     height: 315px;
     width: 1060px;
+    margin: 3px;
   }
 
   .weekday {
@@ -45,13 +66,13 @@
       padding: 5px  ;
       vertical-align: top;
       display: inline-block;
-      background: #E6EBE0;
+      background: #FFFFFF;
       height: 300px;
       width: 140px;
   }
 
   .weekdayName {
-    background-color: #F45B69;
+    background-color: #6B6B6B;
     color: #E6EBE0;
     padding: 3px;
     margin-bottom: 5px;
@@ -96,7 +117,7 @@
   }
 
   .addNew {
-    background-color: #F45B69;
+    background-color: #6B6B6B;
     color: #E6EBE0;
     font-size: 10px;
     margin-bottom: 3px;
@@ -127,19 +148,19 @@
   }
 
   .cardio {
-    background-color: #52AF60;
+    background-color: #00E6E6;
   }
 
   .weightlifting {
-    background-color: #0A8D93;
+    background-color: #57A9F3;
   }
 
   .stretching {
-    background-color: #028090;
+    background-color: #1176DB;
   }
 
   .other {
-    background-color: #006696;
+    background-color: #FF66CC;
   }
 
 /*   *****************************   */
