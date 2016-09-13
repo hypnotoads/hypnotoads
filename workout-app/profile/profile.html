@@ -54,8 +54,10 @@
               <div class="chart-title">
                 Weekly Progress Chart
               </div>
+              <div ng-if="data.workouts">
                <div class="chart-stage barchart">
                   <bars-chart chart-data="data.workouts" /></bars-chart>
+                </div>
                 </div>
               </div>
             </div>
