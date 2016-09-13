@@ -1,18 +1,12 @@
-<nav class="navbar navbar-default" ng-controller="AuthController">
-  <ul class="nav navbar-nav">
-    <li><a class="selected" href="#/profile">My Profile</a></li>
-    <li><a href="#/postWorkout">Update Schedule</a></li>
-    <li><a href="#/feed">Feed</a></li>
-    <li><a href="#/signout" ng-click="signout()" >Log Out</a></li>
-  </ul>
-</nav>
 
 
-<div class="container-fluid profile-only" ng-app="profile" ng-controller="ProfileController">
+
+
+  <div class="container-fluid">
 
 <!-- Welcome Back Row  -->
 
-  <div class="row">
+<div class="row">
     <div class="col-sm-12">
       <div class="chart-stage welcome-back">
         <h2>Welcome Back, {{data.username}}!</h2>
@@ -20,13 +14,12 @@
     </div>
   </div>
 
-<!-- First Row, workout feed & bar chart -->
-
   <!-- Workout Feed -->
-   <div class="row" id="toprow">
-    <div class="col-sm-3">
-      <div class="chart-wrapper">
-        <div class="chart-title">
+
+    <div class="row">
+      <div class="col-sm-3">
+        <div class="chart-wrapper">
+          <div class="chart-title">
           My Recent Workouts
         </div>
         <div class="chart-stage sidebar">
@@ -38,57 +31,49 @@
               <div class="workout-calories">{{ workout.calories }} calories</div>
               <div class="comment">Comment: {{ workout.comment }}</div>
               <div class="created-at">{{ workout.createdAt }}</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-      <!-- All D3 Charts -->
+ <!-- large weekly progress bar chart -->
+
       <div class="col-sm-9">
         <div class="row">
-
-          <!-- large weekly progress bar chart -->
-            <div class="col-sm-12">
+          <div class="col-sm-12">
             <div class="chart-wrapper">
               <div class="chart-title">
                 Weekly Progress Chart
               </div>
-              <div ng-if="data.workouts">
+              <div ng-if="data.workouts">  
                <div class="chart-stage barchart">
                   <bars-chart chart-data="data.workouts" /></bars-chart>
+                  </div>
                 </div>
+            </div>
+          </div>
+        </div>
+
+    <!-- workout days this week -->
+
+        <div class="row">
+          <div class="col-sm-4">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Workout Days This week
+              </div>
+              <div class="chart-stage smallboxes" id="workout-days-chart">
+                <div ng-if="data.workouts">
+                  <workout-days-chart chart-data="data.workouts">
+                  </workout-days-chart>
                 </div>
               </div>
             </div>
           </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
-<!--smaller charts -->
-  <div class="row" id="secondrow">
-    <div class="col-sm-4">
-
-    <!-- workout days this week -->
-      <div class="chart-wrapper">
-        <div class="chart-title">
-          Workout Days This week
-        </div>
-        <div class="chart-stage smallboxes" id="workout-days-chart">
-          <div ng-if="data.workouts">
-            <workout-days-chart chart-data="data.workouts">
-            </workout-days-chart>
-          </div>
-        </div>
-      </div>
-    </div>
-
-  <!-- calories this month -->
-    <div class="col-sm-4">
+    <!-- calories this month -->
+          <div class="col-sm-4">
       <div class="chart-wrapper">
         <div class="chart-title">
             Calories Burned This Month
@@ -101,21 +86,18 @@
         </div>
       </div>
 
-    <!-- TBD Chart -->
-      <div class="col-sm-4">
-        <div class="chart-wrapper">
-          <div class="chart-title">
-            Your Custom Chart Here!
-          </div>
-          <div class="chart-stage">
-            <img data-src="holder.js/100%x120/white">
+       <!-- TBD Chart -->
+          <div class="col-sm-4">
+            <div class="chart-wrapper">
+              <div class="chart-title">
+                Add your chart here!
+              </div>
+              <div class="chart-stage">
+                <img src="https://hourtimefitness.com/themes/default/assets/images/icons/man-running-revised.png">
+              </div>
+            </div>
           </div>
         </div>
+       </div>
       </div>
     </div>
-  </div>
-
-
-
-
-
