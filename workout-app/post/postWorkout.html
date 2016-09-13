@@ -12,6 +12,8 @@
 <h4>For the week of: </h4>
 <h3>{{ weekStart }} to {{ weekEnd }}</h3>
 <br>
+<button ng-click="changeDisplayedWeek('prev')">Go to previous week!</button>
+<button ng-click="changeDisplayedWeek('next')">Go to next week!</button>
 <div class="weeklyLayout">
   <div class="weekday" ng-repeat="(stringDayOfWeek, numericalDayOfWeek) in daysOfTheWeek" >
 
@@ -97,7 +99,5 @@
   </div>
 </div>
 
-<button ng-click="changeDisplayedWeek('prev')">Go to previous week!</button>
-<button ng-click="changeDisplayedWeek('next')">Go to next week!</button>
 
 </center>
