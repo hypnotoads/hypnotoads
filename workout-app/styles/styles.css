@@ -38,7 +38,7 @@
 
   #allLayouts {
     overflow: auto;
-    top: 250px;
+    top: 200px;
     bottom: 20px;
     position: fixed;
     border: dashed 2px #DBDBDB;
@@ -246,7 +246,7 @@ body.application > .container-fluid,
   /*sidebar */
 .chart-wrapper .sidebar {
   overflow: scroll;
-  max-height: 450px; 
+  max-height: 635px; 
 }
 .workout-item{
   padding:10px 10px;
