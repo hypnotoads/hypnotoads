@@ -38,7 +38,7 @@
 
   #allLayouts {
     overflow: auto;
-    top: 200px;
+    top: 250px;
     bottom: 20px;
     position: fixed;
     border: dashed 2px #DBDBDB;
