@@ -11,6 +11,8 @@
 <h4>For the week of: </h4>
 <h3>{{ weekStart }} to {{ weekEnd }}</h3>
 <br>
+<button ng-click="changeDisplayedWeek('prev')">Go to previous week!</button>
+<button ng-click="changeDisplayedWeek('next')">Go to next week!</button>
 <div id="allLayouts">
 <div ng-repeat="user in usernamesDatabase">
   <br>
@@ -50,8 +52,7 @@
   </div>
 </div>
 </div>
-<button ng-click="changeDisplayedWeek('prev')">Go to previous week!</button>
-<button ng-click="changeDisplayedWeek('next')">Go to next week!</button>
+
 
 
 </center>
