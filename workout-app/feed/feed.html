@@ -24,7 +24,7 @@
 
       <div ng-show="!addNewElement[stringDayOfWeek].hidden" ng-repeat="workout in workoutsDatabase | filter: { UserId: user.id, day: numericalDayOfWeek, week: displayedWeek }" class="theWorkouts {{ workout.category }}">
         <span ng-show="!workout.hidden" ng-click="toggle(workout)" >
-          {{ workout.category }}
+          {{ workout.type }}
         </span>
 
         <span ng-show="workout.hidden" class="workoutDetailed">
